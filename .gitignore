@@ -1,0 +1,10 @@
+echo ".env" >> .gitignore
+echo "__pycache__/" >> .gitignore
+echo ".venv/" >> .gitignore
+echo "*.pyc" >> .gitignore
+echo ".DS_Store" >> .gitignore
+
+class Config:
+        env_file = ".env"
+
+settings = Settings()
