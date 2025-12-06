@@ -1,55 +1,66 @@
-from typing import List
+
 from src.infrastructure.llm.generic_provider import GenericLLMProvider
 from src.infrastructure.vector_store.vector_provider import VectorDBProvider
-from src.infrastructure.chunking.recursive_chunker import RecursiveChunker
+from typing import List, Dict, Any
 from src.infrastructure.llm.factory import LLMFactory
-
+from src.infrastructure.vector_store.chunking import RecursiveChunker
 
 class RagService:
     def __init__(self):
-        self.llm = LLMFactory.create_provider()
+       
+        self.llm = LLMFactory.create_provider()  
+        self.vector_db = VectorDBProvider()      
+        self.chunker = RecursiveChunker()       
+
+    async def add_knowledge(self, text: str, metadata: dict = None):
+     
+        print(" Chunking text...")
+
+        chunks = self.chunker.chunk_text(text, chunk_size=500, chunk_overlap=50)
+        print(f"Split text into {len(chunks)} chunks.")
+
+        embeddings = []
+        for chunk in chunks:
+         
+            emb = await self.llm.embed_text(chunk)
+            embeddings.append(emb)
         
-        self.vector_db = VectorDBProvider()
-        self.chunker = RecursiveChunker()
-
-    async def add_knowledge(self, text: str):
-
-        embedding_vector = await self.llm.embed_text(text)
-        await self.vector_db.add_documents(texts=[text], embeddings=[embedding_vector])
-        print(f" Added: {text[:30]}...")
-
-    async def search(self, query: str, k: int = 3) -> str:
-
-        query_vector = await self.llm.embed_text(query)
-        results = await self.vector_db.search(query_embedding=query_vector, k=k)
+        metadatas_list = [metadata or {} for _ in chunks]
         
-        found_texts = [res['content'] for res in results]
-        return "\n".join(found_texts)
+        await self.vector_db.add_documents(
+            texts=chunks, 
+            embeddings=embeddings, 
+            metadatas=metadatas_list
+        )
+        print(f"Successfully stored {len(chunks)} chunks in Vector DB.")
 
     async def ask(self, question: str) -> str:
-
-        print(f" Thinking about: {question}")
-
-        context = await self.search(question)
+        print(f"Thinking about: {question}")
         
-        if not context:
+ 
+        query_vector = await self.llm.embed_text(question)
+
+        results = await self.vector_db.search(query_embedding=query_vector, k=3)
+
+        context_text = "\n\n".join([res['content'] for res in results])
+        
+        if not context_text:
             return "No relevant information found in knowledge base."
 
 
         full_prompt = f"""
         Use the following pieces of context to answer the user's question.
-        If you don't know the answer, just say that you don't know, don't try to make up an answer.
+        If you don't know the answer, just say that you don't know.
         
         Context:
-        {context}
+        {context_text}
         
         Question: {question}
         """
 
         answer = await self.llm.generate_text(
             prompt=full_prompt,
-            max_output_tokens=500,
+            max_output_tokens=1000,
             temperature=0.3
         )
-        
         return answer
