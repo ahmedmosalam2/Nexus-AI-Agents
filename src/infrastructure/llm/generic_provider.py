@@ -28,8 +28,7 @@ class GenericLLMProvider(LLMinference):
         prompt: str, 
         max_output_tokens: int, 
         temperature: float, 
-        chat_history: list = []
-    ) -> str:
+        chat_history: list = []) -> str:
         url = f"{self.base_url}/chat/completions"
         
 
@@ -45,7 +44,6 @@ class GenericLLMProvider(LLMinference):
             "temperature": temperature,
             "stream": False
         }
-
         async with aiohttp.ClientSession() as session:
             async with session.post(url, json=payload) as response:
                 if response.status != 200:
@@ -53,7 +51,7 @@ class GenericLLMProvider(LLMinference):
                 
                 data = await response.json()
                 return data["choices"][0]["message"]["content"]
-
+            
 
     async def embed_text(self, text: str, document_type: str = "document") -> List[float]:
 
@@ -63,7 +61,6 @@ class GenericLLMProvider(LLMinference):
             "model": self.embed_model,
             "prompt": text
         }
-
         async with aiohttp.ClientSession() as session:
             async with session.post(url, json=payload) as response:
                 if response.status != 200:
