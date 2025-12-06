@@ -1,4 +1,12 @@
-loguru
+
+fastapi
+uvicorn[standard]
+
 pydantic-settings
-pydantic
-fastembed
+python-dotenv
+
+
+chromadb
+aiohttp
+
+loguru

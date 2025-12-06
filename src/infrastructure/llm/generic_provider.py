@@ -5,8 +5,8 @@ from src.config.settings import settings
 
 class GenericLLMProvider(LLMinference):
     def __init__(self, base_url: str = None):
-        # الإعدادات الافتراضية
-        self.base_url = base_url or "http://localhost:11434/v1"
+  
+        self.base_url = base_url or "http://192.168.1.2:11434/v1"
         self.gen_model = settings.DEFAULT_MODEL
         self.embed_model = settings.EMBEDDING_MODEL
         self.api_key = "ollama" 
@@ -55,7 +55,7 @@ class GenericLLMProvider(LLMinference):
 
     async def embed_text(self, text: str, document_type: str = "document") -> List[float]:
 
-        url = "http://localhost:11434/api/embeddings"
+        url = "http://192.168.1.2:11434/api/embeddings"
         
         payload = {
             "model": self.embed_model,
