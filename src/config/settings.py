@@ -21,7 +21,12 @@ class Settings(BaseSettings):
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_DB: str = "nexus_db"
     POSTGRES_PORT: int = 5432
+ 
+    AI_PROVIDER: str = "ollama" 
 
+
+    GEMINI_API_KEY: Optional[str] = None
+    GEMINI_MODEL: str = "gemini-1.5-flash"
   
     DEFAULT_MODEL: str = "qwen3-vl:4b"
     EMBEDDING_MODEL: str = "text-embedding-3-small"

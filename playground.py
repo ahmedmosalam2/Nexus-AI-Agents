@@ -11,7 +11,7 @@ async def main():
 
     try:
         rag = RagService()
-        print("✅ Service Initialized Successfully.")
+        print("Service Initialized Successfully.")
     except Exception as e:
         print(f" Error Initializing Service: {e}")
         return

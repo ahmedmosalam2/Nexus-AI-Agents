@@ -1,11 +1,16 @@
 from typing import List
 from src.infrastructure.llm.generic_provider import GenericLLMProvider
 from src.infrastructure.vector_store.vector_provider import VectorDBProvider
+from src.infrastructure.chunking.recursive_chunker import RecursiveChunker
+from src.infrastructure.llm.factory import LLMFactory
+
 
 class RagService:
     def __init__(self):
-        self.llm = GenericLLMProvider()
+        self.llm = LLMFactory.create_provider()
+        
         self.vector_db = VectorDBProvider()
+        self.chunker = RecursiveChunker()
 
     async def add_knowledge(self, text: str):
 
