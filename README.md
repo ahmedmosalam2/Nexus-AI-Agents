@@ -14,7 +14,7 @@
 
 ---
 
-#  Nexus: The Autonomous AI Agent
+# Nexus: The Autonomous AI Agent
 
 **Nexus is a powerful, autonomous AI agent designed to bridge the gap between complex data and actionable insights.**
 
@@ -22,7 +22,7 @@ The agent utilizes state-of-the-art LLMs to autonomously plan, execute, and anal
 
 Our mission is to empower developers and enterprises with a scalable, intelligent "brain" that can adapt to any environment.
 
-## ⚡ Why Nexus?
+##  Why Nexus?
 
 - **🚀 Autonomous Operation:** Give it a goal, and Nexus figures out the steps.
 - **🔗 Seamless Integration:** Connects easily with Docker, APIs, and Databases.
