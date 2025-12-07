@@ -18,3 +18,10 @@ class AgentRole(str, Enum):
     USER = "user"
     ASSISTANT = "assistant"
     TOOL = "tool"
+
+class EmbeddingModel(str, Enum):
+    OPENAI_TEXT_EMBEDDING_3_SMALL = "text-embedding-3-small"
+    OPENAI_TEXT_EMBEDDING_3_LARGE = "text-embedding-3-large"
+    HUGGINGFACE_ALL_MiniLM_L6_V2 = "all-MiniLM-L6-v2"
+    HUGGINGFACE_ALL_DistilRoBERTa_V1 = "all-DistilRoBERTa-v1"
+    HUGGINGFACE_Sentence_Transformer_V1 = "sentence-transformers/all-mpnet-base-v2"

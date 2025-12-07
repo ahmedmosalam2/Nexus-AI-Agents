@@ -10,3 +10,4 @@ chromadb
 aiohttp
 
 loguru
+duckduckgo-search

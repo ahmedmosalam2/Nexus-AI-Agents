@@ -27,4 +27,4 @@ Our mission is to empower developers and enterprises with a scalable, intelligen
 - **🚀 Autonomous Operation:** Give it a goal, and Nexus figures out the steps.
 - **🔗 Seamless Integration:** Connects easily with Docker, APIs, and Databases.
 - **🧠 Context Awareness:** Remembers past interactions to provide smarter results.
-- **🛡️ Secure & Private:** Built with privacy-first architecture.
+- **🛡️ Secure & Private:** Built with privacy-first architecture.فق
