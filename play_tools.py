@@ -8,7 +8,7 @@ async def main():
    
     search_tool = WebSearchTool(max_results=3)
 
-    query = "who is Mohamed salah?"
+    query = "who is Messi?"
     
     print(f" Asking: {query}")
     try:

@@ -11,3 +11,4 @@ aiohttp
 
 loguru
 duckduckgo-search
+googlesearch-python

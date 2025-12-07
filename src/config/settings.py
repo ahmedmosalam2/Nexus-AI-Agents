@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     DEFAULT_MODEL: str = "qwen3-vl:4b"
     EMBEDDING_MODEL: str = "text-embedding-3-small"
     TEMPERATURE: float = 0.0
+    TAVILY_API_KEY: Optional[str] = None
 
     class Config:
         env_file = ".env"
