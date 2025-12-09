@@ -6,9 +6,7 @@ class ContextCompressor:
         self.llm = LLMFactory.create_provider()
 
     async def compress(self, text: str, query: str) -> str:
-        """
-        الوظيفة: تاخد نص طويل جداً، وترجع ملخص مفيد ليه علاقة بالسؤال.
-        """
+ 
       
         if len(text) < 1000:
             return text
