@@ -1,24 +1,25 @@
 import asyncio
-
-from src.infrastructure.tools.search_tool import WebSearchTool
+from src.infrastructure.tools.scraper_tool import WebScraperTool
+from src.services.context.compression import ContextCompressor
 
 async def main():
-    print(" Testing Enterprise Search Tool (DuckDuckGo)...\n")
+    scraper = WebScraperTool()
+    compressor = ContextCompressor()
     
-   
-    search_tool = WebSearchTool(max_results=3)
-
-    query = "who is Messi?"
+    url = "https://en.wikipedia.org/wiki/Python_(programming_language)"
+    query = "Who created Python?"
     
-    print(f" Asking: {query}")
-    try:
-        result = await search_tool.run(query)
-        print("\n📄 Agent Report:")
-        print("="*40)
-        print(result)
-        print("="*40)
-    except Exception as e:
-        print(f" Error: {e}")
+    print("1️⃣ Reading the full website...")
+    raw_text = await scraper.run(url)
+    print(f"-> Size before compression: {len(raw_text)} chars (Too big!)")
+    
+    print("\n2️⃣ Compressing...")
+    clean_text = await compressor.compress(raw_text, query)
+    
+    print("\n📄 Result:")
+    print("="*40)
+    print(clean_text)
+    print("="*40)
 
 if __name__ == "__main__":
     asyncio.run(main())
