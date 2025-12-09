@@ -1,5 +1,5 @@
 from src.domain.interfaces.tool import BaseTool
-# 1. استدعاء الكلاس الجديد
+
 from src.infrastructure.tools.search.tavily import TavilySearch
 
 class WebSearchTool(BaseTool):
@@ -17,7 +17,6 @@ class WebSearchTool(BaseTool):
         return "Search the internet using Tavily (Optimized for AI)."
 
     async def run(self, query: str) -> str:
-        # باقي الكود زي ما هو بالظبط (لأننا بنستخدم نفس الـ Interface)
         raw_results = await self.provider.search(query, self.max_results)
         
         if not raw_results:
