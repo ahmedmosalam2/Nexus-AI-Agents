@@ -5,7 +5,8 @@ uvicorn[standard]
 pydantic-settings
 python-dotenv
 
-
+beautifulsoup4
+httpx
 chromadb
 aiohttp
 
