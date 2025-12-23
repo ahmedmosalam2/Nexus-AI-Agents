@@ -22,12 +22,10 @@ async def main():
     if not url:
         print("Error: No URL provided.")
         return
-
     try:
         print("Initializing components...")
         scraper = WebScraperTool()
         compressor = ContextCompressor()
-
         print(f"Scraping URL: {url}...")
         raw_content = await scraper.run(url)
 
